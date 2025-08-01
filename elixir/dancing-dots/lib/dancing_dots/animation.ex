@@ -39,13 +39,8 @@ defmodule DancingDots.Zoom do
 
   @impl DancingDots.Animation
   def handle_frame(dot, frame_number, opts) do
-    frame_number = frame_number - 1
-    case frame_number do
-      0 ->
-        dot
-      _ ->
-        %{ dot | radius: dot.radius + opts[:velocity] * frame_number }
-    end
+    %{ dot | radius: dot.radius + opts[:velocity] * (frame_number - 1) }
   end
+
 
 end
