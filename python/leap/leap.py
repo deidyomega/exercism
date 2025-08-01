@@ -1,4 +1,4 @@
-def is_leap_year(value):
+def is_leap_year(value: int):
     # Used: https://support.microsoft.com/en-us/help/214019/method-to-determine-whether-a-year-is-a-leap-year
 
     if value % 4 != 0:
