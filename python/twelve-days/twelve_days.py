@@ -37,13 +37,3 @@ def recite_single(verse):
         things[0] = "and a Partridge in a Pear Tree."
     intro = "On the {} day of Christmas my true love gave to me: ".format(days[verse])
     return intro + "".join(reversed(things[0:verse]))
-
-
-
-
-
-expected = [
-            "On the first day of Christmas my true love gave to me: "
-            "a Partridge in a Pear Tree."
-        ]
-print(recite(1, 1), expected)
