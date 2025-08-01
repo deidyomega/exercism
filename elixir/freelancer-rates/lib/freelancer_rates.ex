@@ -9,7 +9,7 @@ defmodule FreelancerRates do
   def apply_discount(before_discount, discount), do: before_discount * (1 - discount / 100)
 
   @spec daily_discounted_rate(number(), number()) :: float()
-  def daily_discounted_rate(hourly_rate, discount) do
+  defp daily_discounted_rate(hourly_rate, discount) do
     hourly_rate
     |> daily_rate
     |> apply_discount(discount)
