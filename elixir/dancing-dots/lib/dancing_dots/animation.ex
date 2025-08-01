@@ -10,11 +10,7 @@ defmodule DancingDots.Animation do
   defmacro __using__(_opts) do
     quote do
       @behaviour DancingDots.Animation
-
-      def init(opts) do
-        {:ok, opts}
-      end
-
+      def init(opts), do: {:ok, opts}
       defoverridable [init: 1]
     end
   end
