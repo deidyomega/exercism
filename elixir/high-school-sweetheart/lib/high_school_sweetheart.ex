@@ -7,6 +7,11 @@ defmodule HighSchoolSweetheart do
     "#{initial(first)} #{initial(last)}"
   end
 
-  def pair(full_name1, full_name2), do: "❤-------------------❤\n|  #{initials(full_name1)}  +  #{initials(full_name2)}  |\n❤-------------------❤\n"
-
+  def pair(full_name1, full_name2) do
+  """
+❤-------------------❤
+|  #{initials(full_name1)}  +  #{initials(full_name2)}  |
+❤-------------------❤
+"""
+  end
 end
