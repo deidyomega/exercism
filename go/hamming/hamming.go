@@ -4,11 +4,9 @@ import "errors"
 
 const testVersion = 6
 
-func Distance(dna1_s, dna2_s string) (int, error) {
-	dna1 := []rune(dna1_s)
-	dna2 := []rune(dna2_s)
+func Distance(dna1, dna2 string) (int, error) {
 	var count int
-	length := len(dna1)
+	length := len(dna1) // cache this, so we don't have to redetermine every loop
 
 	if length != len(dna2) {
 		return -1, errors.New("Length must be identical")
