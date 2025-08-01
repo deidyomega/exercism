@@ -11,12 +11,10 @@ defmodule RPG.CharacterSheet do
   
   def run() do
     welcome()
-    char = %{
+    IO.inspect(%{
       name: ask_name(),
       class: ask_class(),
       level: ask_level()
-    }
-    IO.puts("Your character: #{inspect(char)}")
-    char
+    }, label: "Your character")
   end
 end
