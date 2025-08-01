@@ -8,7 +8,6 @@ defmodule NameBadge do
   end
 
   def print(id, name, department) do
-    # Please implement the print/3 function
     if id do
       "[#{id}] - #{name} - #{dept(department)}"
     else
