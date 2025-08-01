@@ -5,10 +5,4 @@ def to_rna(value):
         "T": "A",
         "A": "U"
     }
-    if set(RNA.keys()).issuperset(set(value)) is not True:
-        return ""
-
-    out = ""
-    for item in value:
-        out += RNA[item]
-    return out
+    return "".join([RNA[item] for item in value])
