@@ -7,7 +7,7 @@ defmodule LogLevel do
   def to_label(_, _), do: :unknown
 
 
-  @spec alert_recipient(integer(), boolean()) :: :dev1 | :dev2 | false | :ops
+  @spec alert_recipient(integer(), boolean()) :: :ops | :dev1 | :dev2 | false
   def alert_recipient(level, legacy?) do
     case to_label(level, legacy?) do
       label when label in [:error, :fatal] -> :ops
