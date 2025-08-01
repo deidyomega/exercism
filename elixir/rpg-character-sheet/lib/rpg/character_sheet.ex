@@ -1,13 +1,10 @@
 defmodule RPG.CharacterSheet do
-  def welcome() do
-    IO.puts("Welcome! Let's fill out your character sheet together.")
-  end
+  def welcome(), do: IO.puts("Welcome! Let's fill out your character sheet together.")
 
-  defp ask(thing), do: IO.gets(thing) |> String.trim
-
-  def ask_name(), do: ask("What is your character's name?\n")
-  def ask_class(), do: ask("What is your character's class?\n")
-  def ask_level(), do: ask("What is your character's level?\n") |> String.to_integer
+  defp ask(thing), do: IO.gets("What is your character's #{thing}?\n") |> String.trim
+  def ask_name(), do: ask("name")
+  def ask_class(), do: ask("class")
+  def ask_level(), do: ask("level") |> String.to_integer
   
   def run() do
     welcome()
