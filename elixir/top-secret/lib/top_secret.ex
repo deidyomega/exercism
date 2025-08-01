@@ -1,7 +1,5 @@
 defmodule TopSecret do
-  def to_ast(string) do
-    Code.string_to_quoted!(string)
-  end
+  def to_ast(string), do: Code.string_to_quoted!(string)
 
   def decode_secret_message_part({op, _, args} = ast, acc) when op in [:def, :defp] do
     {name, args} = name_and_args(args)
@@ -9,21 +7,12 @@ defmodule TopSecret do
     {ast, [name_slice | acc]}
   end
 
-  def decode_secret_message_part(ast, acc) do
-    {ast, acc}
-  end
+  def decode_secret_message_part(ast, acc), do: {ast, acc}
 
-  defp name_and_args([{:when, _, args} | _]) do
-    name_and_args(args)
-  end
 
-  defp name_and_args([{name, _, args} | _]) when is_list(args) do
-    {name, args}
-  end
-
-  defp name_and_args([{name, _, args} | _]) when is_atom(args) do
-    {name, []}
-  end
+  defp name_and_args([{:when, _, args} | _]), do: name_and_args(args)
+  defp name_and_args([{name, _, args} | _]) when is_list(args), do: {name, args}
+  defp name_and_args([{name, _, args} | _]) when is_atom(args), do: {name, []}
 
   def decode_secret_message(string) do
     ast = to_ast(string)
