@@ -1,13 +1,6 @@
 def abbreviate(words):
-    words = words.replace("-", " ")
-    words = words.replace("_", "")
-    word_lst = words.split(" ")
-    output = ""
-    for item in word_lst:
-        if item == "":
-            continue
-        output += item[0]
-    return output.upper()
+    word_lst = words.replace("-", " ").replace("_", "").split()
+    return "".join([x[0] for x in word_lst if x != ""]).upper()
 
 
 print(abbreviate("Something - I made up from thin air"), "SIMUFTA")
