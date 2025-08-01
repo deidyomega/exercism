@@ -1,13 +1,3 @@
-"""
-To the poor sap reading this.
-I didn't actually implment a circularbuffer,
-
-But it handles all the cases just fine.
-
-Basically the first item is always the oldest
-and as they are read, it's deleted, and a new 
-spot appears at the end of the list
-"""
 class BufferFullException(Exception):
     pass
 
@@ -17,39 +7,38 @@ class BufferEmptyException(Exception):
 
 
 class CircularBuffer(object):
-    __list_size = 0
-    __list_data = []
-
     def __init__(self, capacity):
-        self.__list_size = capacity
-        self.clear()
+        self.capacity = capacity
+        self._read_pointer = 0
+        self._write_pointer = 0
+        self._data = [None] * self.capacity
 
     def read(self):
-        # read the oldest
-        data = self.__list_data[0]
+        data = self._data[self._read_pointer]
         if data is None:
-            raise BufferEmptyException("Buffer empty")
-        del self.__list_data[0]
-        self.__list_data.append(None)
+            raise BufferEmptyException("Buffer Empty")
+        
+        self._data[self._write_pointer] = None
+        self._read_pointer = (self._read_pointer + 1) % self.capacity
+
         return data
 
+
     def write(self, data):
-        x = 0
-        while x < len(self.__list_data):
-            if self.__list_data[x] == None:
-                self.__list_data[x] = data
-                return
-            x += 1
-        raise BufferFullException("Buffer full")
+        if self._data[self._write_pointer] is not None:
+            raise BufferFullException("Buffer Full")
+        self._data[self._write_pointer] = data
+        self._write_pointer = (self._write_pointer + 1) % self.capacity
 
     def overwrite(self, data):
-        if None in self.__list_data:
-            self.write(data)
-        else:
-            self.read()
-            self.write(data)
+        # if they are the same, we need to move the read pointer,
+        # to match the write pointer (when it increments in a second)
+        if self._write_pointer == self._read_pointer:
+            self._read_pointer = (self._read_pointer + 1) % self.capacity
+
+        self._data[self._write_pointer] = data
+        self._write_pointer = (self._write_pointer + 1) % self.capacity
 
     def clear(self):
-        self.__list_data = [None] * self.__list_size
-
+        self._data = [None] * self.capacity
 
