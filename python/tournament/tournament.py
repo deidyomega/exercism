@@ -27,16 +27,15 @@ def tally(rows):
             score[t1]["p"] += 1
             score[t2]["p"] += 1
     
-    tbl = ["Team                           | MP |  W |  D |  L |  P"]
-    # we make the score negitive, as to reverse the sort order of the score
-    for team in sorted(score, key=lambda x: (0-score[x]['p'], x)):
-        tbl.append(f"{team: <31}|  "
-                   f"{score[team]['mp']} |  "
-                   f"{score[team]['w']} |  "
-                   f"{score[team]['d']} |  "
-                   f"{score[team]['l']} |  "
-                   f"{score[team]['p']}"
-        )
-    return tbl
+    return [f"{'Team': <31}| MP |  W |  D |  L |  P"] + \
+    [
+        f"{team: <31}|  "
+        f"{score[team]['mp']} |  "
+        f"{score[team]['w']} |  "
+        f"{score[team]['d']} |  "
+        f"{score[team]['l']} |  "
+        f"{score[team]['p']}" for team in 
+        sorted(score, key=lambda x: (-score[x]['p'], x))
+    ]
 
 
