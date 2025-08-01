@@ -1,17 +1,11 @@
 defmodule NameBadge do
-  defp dept(department) do
-    if department do
-      String.upcase(department)
-    else
-      "OWNER"
-    end
-  end
-
   def print(id, name, department) do
+    dep = if department, do: String.upcase(department), else: "OWNER"
+
     if id do
-      "[#{id}] - #{name} - #{dept(department)}"
+      "[#{id}] - #{name} - #{dep}"
     else
-      "#{name} - #{dept(department)}"
+      "#{name} - #{dep}"
     end
     
   end
