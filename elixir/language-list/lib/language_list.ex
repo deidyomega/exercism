@@ -15,5 +15,5 @@ defmodule LanguageList do
 
   def count(list), do: list |> length
 
-  def functional_list?(list), do: Enum.member?(list, "Elixir")
+  def functional_list?(list), do: List.member?(list, "Elixir")
 end
