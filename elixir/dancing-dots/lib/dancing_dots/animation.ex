@@ -38,15 +38,8 @@ defmodule DancingDots.Zoom do
   use DancingDots.Animation
 
   @impl DancingDots.Animation
-  def init([velocity: velocity]) when is_number(velocity) do
-    {:ok, [velocity: velocity]}
-  end
-  def init([velocity: velocity]) do
-    {:error, "The :velocity option is required, and its value must be a number. Got: \"#{velocity}\""}
-  end
-  def init(_opts) do
-    {:error, "The :velocity option is required, and its value must be a number. Got: nil"}
-  end
+  def init([velocity: velocity]) when is_number(velocity), do: {:ok, [velocity: velocity]}
+  def init(opts), do: {:error,  "The :velocity option is required, and its value must be a number. Got: #{inspect(Keyword.get(opts, :velocity))}"}
 
   @impl DancingDots.Animation
   def handle_frame(dot, frame_number, opts) do
