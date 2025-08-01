@@ -1,35 +1,21 @@
-class InputCell(object):
+class InputCell:
     def __init__(self, initial_value):
-        self.value = initial_value
+        self._value = initial_value
+        self.parents = set()
 
-    def __add__(self, other):
-        if isinstance(other, (int, float)):
-            self.value = self.value + other
-        else:
-            self.value = self.value + other.value
-        return self.value
+    @property
+    def value(self):
+        return self._value
 
-    def __sub__(self, other):
-        if isinstance(other, (int, float)):
-            self.value = self.value - other
-        else:
-            self.value = self.value - other.value
-        return self.value
+    @value.setter
+    def value(self, value):
+        if self._value != value:
+            self._value = value
+            for parent in self.parents:
+                parent.compute()
+            for parent in self.parents:
+                parent.run_callbacks()
 
-    def __mul__(self, other):
-        if isinstance(other, (int, float)):
-            self.value = self.value * other
-        else:
-            self.value = self.value * other.value
-        return self.value
-
-    def __div__(self, other):
-        if isinstance(other, (int, float)):
-            self.value = self.value / other
-        else:
-            self.value = self.value / other.value
-        return self.value
-    
 
 class ComputeCell(object):
     def __init__(self, inputs, compute_function):
