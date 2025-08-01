@@ -1,9 +1,12 @@
+from threading import Lock
+
 class BankAccount:
     closed_msg = "Account is closed"
 
     def __init__(self):
         self.state = "closed"
         self.balance = 0
+        self.lock = Lock()
 
     def get_balance(self):
         if self.state == "closed":
@@ -20,8 +23,8 @@ class BankAccount:
             raise ValueError(self.closed_msg)            
         if amount < 0:
             raise ValueError("Can not withdrawal neg. values.  To deposit, use deposit().")
-        
-        self.balance += amount
+        with self.lock:
+            self.balance += amount
 
     def withdraw(self, amount):
         if self.state == "closed":
@@ -30,7 +33,8 @@ class BankAccount:
             raise ValueError("Can not withdrawal neg. values.  To deposit, use deposit().")
         if amount > self.balance:
             raise ValueError("Insufficient Funds")
-        self.balance -= amount
+        with self.lock:
+            self.balance -= amount
 
     def close(self):
         if self.state == "closed":
