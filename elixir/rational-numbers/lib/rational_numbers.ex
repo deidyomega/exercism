@@ -48,16 +48,13 @@ defmodule RationalNumbers do
   @spec pow_real(x :: integer, n :: rational) :: float
   def pow_real(x, {a1, b1}), do: :math.pow(x, a1/b1)
 
-  defp gcd(a, 0) when is_integer(a), do: a
-  defp gcd(a, b), do: gcd(b, rem(a, b))
-
   @doc """
   Reduce a rational number to its lowest terms
   """
   @spec reduce(a :: rational) :: rational
   def reduce({a, b}) when b < 0, do: {-a, -b} |> reduce
   def reduce({a, b}) do
-    common_divisor = gcd(Kernel.abs(a), Kernel.abs(b))
+    common_divisor = Integer.gcd(a, b)
     {div(a, common_divisor), div(b, common_divisor)}
   end
 end
