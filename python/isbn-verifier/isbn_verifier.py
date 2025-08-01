@@ -11,4 +11,4 @@ def is_valid(isbn):
     # All items must be digits
     if not "".join(isbn).isdigit(): return False
 
-    return sum([((idx+1) * int(num)) for (idx, num) in enumerate(reversed(isbn))]) % 11 == 0
+    return sum((((idx+1) * int(num)) for (idx, num) in enumerate(reversed(isbn)))) % 11 == 0
