@@ -17,8 +17,8 @@ class Robot(object):
             "L": self.turn_left,
             "A": self.advance,
         }
-        for item in sim:
-            actions[item]()
+        [actions[action]() for action in sim]
+            
 
     def turn_right(self):
         self.bearing = (self.bearing + 1) % 4
