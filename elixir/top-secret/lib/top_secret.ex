@@ -8,27 +8,29 @@ defmodule TopSecret do
     name_slice = String.slice(to_string(name), 0, length(args))
     {ast, [name_slice | acc]}
   end
-  def decode_secret_message_part(ast, acc)do
+
+  def decode_secret_message_part(ast, acc) do
     {ast, acc}
   end
 
-
-  def name_and_args([{:when, _, args} | _]) do
+  defp name_and_args([{:when, _, args} | _]) do
     name_and_args(args)
   end
-  def name_and_args([{name, _, args} | _]) when is_list(args) do
+
+  defp name_and_args([{name, _, args} | _]) when is_list(args) do
     {name, args}
   end
-  def name_and_args([{name, _, args} | _]) when is_atom(args) do
+
+  defp name_and_args([{name, _, args} | _]) when is_atom(args) do
     {name, []}
   end
 
   def decode_secret_message(string) do
     ast = to_ast(string)
     {_, acc} = Macro.prewalk(ast, [], &decode_secret_message_part/2)
+
     acc
     |> Enum.reverse()
     |> Enum.join("")
   end
-
 end
