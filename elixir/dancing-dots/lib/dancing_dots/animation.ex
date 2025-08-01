@@ -20,9 +20,6 @@ defmodule DancingDots.Flicker do
   use DancingDots.Animation
 
   @impl DancingDots.Animation
-  def init(opts), do: {:ok, opts}
-
-  @impl DancingDots.Animation
   def handle_frame(dot, frame_number, _opts) do
     case rem(frame_number, 4) do
       0 ->
