@@ -1,4 +1,4 @@
-import random
+import secrets
 from string import ascii_lowercase
 
 #print(ascii_lowercase)
@@ -6,7 +6,7 @@ from string import ascii_lowercase
 class Cipher(object):
     def __init__(self, key=None):
         if key is None:
-            key = "".join([random.choice(ascii_lowercase) for x in range(100)])
+            key = "".join([secrets.choice(ascii_lowercase) for x in range(100)])
         self.key = key
 
     def encode(self, text):
