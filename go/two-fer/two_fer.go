@@ -6,6 +6,5 @@ func ShareWith(myString string) string {
 	if myString == "" {
 		return "One for you, one for me."
 	}
-	var value = fmt.Sprintf("One for %s, one for me.", myString)
-	return value
+	return fmt.Sprintf("One for %s, one for me.", myString)
 }
