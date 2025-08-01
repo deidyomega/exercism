@@ -3,17 +3,11 @@ defmodule LanguageList do
 
   def add(list, language), do: [language | list]
 
-  def remove(list) do
-    [_ | tail] = list
-    tail
-  end
+  def remove(list), do: List.delete_at(list, 0)
 
-  def first(list) do
-    [head | _] = list
-    head
-  end
+  def first(list), do: List.first(list)
 
   def count(list), do: list |> length
 
-  def functional_list?(list), do: List.member?(list, "Elixir")
+  def functional_list?(list), do: "Elixir" in list
 end
