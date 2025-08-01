@@ -4,7 +4,6 @@ defmodule DancingDots.Animation do
   @type error :: any
   @type frame_number :: pos_integer
 
-  # Please implement the module
   @callback init(opts()) :: {:ok, opts()} | {:error, error()}
   @callback handle_frame(dot(), frame_number(), opts()) :: dot()
 
@@ -38,6 +37,7 @@ end
 defmodule DancingDots.Zoom do
   use DancingDots.Animation
 
+  @impl DancingDots.Animation
   def init([velocity: velocity]) when is_number(velocity) do
     {:ok, [velocity: velocity]}
   end
@@ -48,6 +48,7 @@ defmodule DancingDots.Zoom do
     {:error, "The :velocity option is required, and its value must be a number. Got: nil"}
   end
 
+  @impl DancingDots.Animation
   def handle_frame(dot, frame_number, opts) do
     frame_number = frame_number - 1
     case frame_number do
