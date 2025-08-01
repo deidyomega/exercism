@@ -1,24 +1,14 @@
-RNA = {
-    "G": "C",
-    "C": "G",
-    "T": "A",
-    "A": "U"
-    }
-
-RNA_SET = set(RNA.keys())
-
 def to_rna(value):
-    if len(value) > 1:
-        if RNA_SET.issuperset(set(value)) is not True:
-            return ""
-        out = []
-        for item in value:
-            out.append(_to_rna(item))
-        return "".join(out)
+    RNA = {
+        "G": "C",
+        "C": "G",
+        "T": "A",
+        "A": "U"
+    }
+    if set(RNA.keys()).issuperset(set(value)) is not True:
+        return ""
 
-    return _to_rna(value)
-
-def _to_rna(value):
-    if value not in RNA_SET:
-        return ''
-    return RNA[value]
+    out = ""
+    for item in value:
+        out += RNA[item]
+    return out
